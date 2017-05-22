@@ -47,7 +47,7 @@ val ansi = listOf(
     "@file:JvmName(\"Ansi\")", "",
     "package com.importre.crayon", "",
     raw, "") + crayonMap
-    .map { (name, code) -> "const val $name = \"$code\"" }
+    .map { (name, code) -> "const val $name = \"$code\"" } + ""
 
 val crayon = listOf(
     "@file:JvmName(\"Crayon\")", "",
@@ -57,7 +57,7 @@ val crayon = listOf(
         """
         fun String.$name() = "$code${'$'}{this}${reset.first().second}"
         """.trim()
-    }
+    } + ""
 
 File("../src/main/kotlin/com/importre/crayon/Ansi.kt")
     .writeText(ansi.joinToString("\n"), Charsets.UTF_8)

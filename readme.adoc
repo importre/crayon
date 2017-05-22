@@ -1,6 +1,37 @@
 = crayon
 :toc:
 
+== Examples
+
+=== Java
+
+```java
+String title = "Crayon";
+System.out.println(Crayon.red(title));
+```
+
+=== Kotlin
+
+```kotlin
+val title = "Crayon"
+println(title.red())
+```
+
+=== Execution
+
+```sh
+$ ./gradlew -q example:run
+```
+
+==== Solarized Dracula
+
+image::https://cloud.githubusercontent.com/assets/1744446/26310353/763a3d40-3f3b-11e7-95bb-71623f4c772a.png[dark,500]
+
+==== Solarized Light
+
+image::https://cloud.githubusercontent.com/assets/1744446/26310355/768eb03c-3f3b-11e7-8a10-ff59e3f0b7b3.png[light,500]
+
+
 == Decorator
 
 - `bold()`
@@ -56,3 +87,8 @@
 - `bgBrightRed()`
 - `bgBrightWhite()`
 - `bgBrightYellow()`
+
+
+== License
+
+MIT © Jaewe Heo
