@@ -1,0 +1,58 @@
+= crayon
+:toc:
+
+== Decorator
+
+- `bold()`
+- `italic()`
+- `underline()`
+- `reversed()`
+
+
+== Color
+
+=== Default
+
+- `black()`
+- `blue()`
+- `cyan()`
+- `green()`
+- `magenta()`
+- `red()`
+- `white()`
+- `yellow()`
+
+=== Bright (Bold)
+
+- `brightBlack()`
+- `brightBlue()`
+- `brightCyan()`
+- `brightGreen()`
+- `brightMagenta()`
+- `brightRed()`
+- `brightWhite()`
+
+
+== Background Color
+
+=== Default
+
+- `bgBlack()`
+- `bgBlue()`
+- `bgCyan()`
+- `bgGreen()`
+- `bgMagenta()`
+- `bgRed()`
+- `bgWhite()`
+- `bgYellow()`
+
+=== Bright (Bold)
+
+- `bgBrightBlack()`
+- `bgBrightBlue()`
+- `bgBrightCyan()`
+- `bgBrightGreen()`
+- `bgBrightMagenta()`
+- `bgBrightRed()`
+- `bgBrightWhite()`
+- `bgBrightYellow()`
