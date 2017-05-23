@@ -28,3 +28,24 @@ dependencies {
     testCompile "junit:junit:$junit_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
+
+subprojects { sub ->
+    sub.buildscript {
+        ext {
+            kotlin_version = rootProject.ext.kotlin_version
+            junit_version = rootProject.ext.junit_version
+        }
+
+        repositories {
+            jcenter()
+        }
+
+        dependencies {
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        }
+    }
+
+    repositories {
+        jcenter()
+    }
+}
