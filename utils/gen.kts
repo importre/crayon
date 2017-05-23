@@ -29,6 +29,14 @@ fun default(background: Boolean, bright: Boolean) = colors
     }
     .sortedBy { it.first }
 
+fun extension(clazz: String): List<String> = crayonMap
+    .filterNot { (k, _) -> k == "reset" }
+    .map { (name, code) ->
+        """
+        fun $clazz.$name() = "$code${'$'}{this}${reset.first().second}"
+        """.trimIndent()
+    } + ""
+
 val crayonMap = (reset + deco +
     default(false, false) +
     default(false, true) +
@@ -50,14 +58,9 @@ val ansi = listOf(
     .map { (name, code) -> "const val $name = \"$code\"" } + ""
 
 val crayon = listOf(
-    "@file:JvmName(\"Crayon\")", "",
-    "package com.importre.crayon", "") + crayonMap
-    .filterNot { (k, _) -> k == "reset" }
-    .map { (name, code) ->
-        """
-        fun String.$name() = "$code${'$'}{this}${reset.first().second}"
-        """.trim()
-    } + ""
+    listOf("@file:JvmName(\"Crayon\")", "", "package com.importre.crayon", ""),
+    extension("String"),
+    extension("Char")).flatten()
 
 File("../src/main/kotlin/com/importre/crayon/Ansi.kt")
     .writeText(ansi.joinToString("\n"), Charsets.UTF_8)
