@@ -1,9 +1,7 @@
-group 'com.importre'
-version '0.0.0'
-
 buildscript {
     ext {
         kotlin_version = '1.1.2-2'
+        dokka_version = '0.9.13'
         junit_version = '4.12'
     }
 
@@ -13,10 +11,26 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
     }
 }
 
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+    id "co.riiid.gradle" version "0.4.2"
+}
+
 apply plugin: 'kotlin'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'maven-publish'
+
+def _group = 'com.importre'
+def _artifact = 'crayon'
+def _version = '0.0.1'
+def _githubUrl = 'https://github.com/importre/crayon'
+
+group _group
+version _version
 
 repositories {
     jcenter()
@@ -48,4 +62,63 @@ subprojects { sub ->
     repositories {
         jcenter()
     }
+}
+
+task javadocJar(type: Jar, dependsOn: 'dokka') {
+    classifier = 'javadoc'
+    from "$buildDir/dokka"
+}
+
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = 'javadoc'
+}
+
+publishing {
+    publications {
+        LibPublish(MavenPublication) {
+            from components.java
+            groupId _group
+            artifactId _artifact
+            version _version
+            artifact javadocJar
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['LibPublish']
+    publish = true
+    dryRun = true
+
+    pkg {
+        repo = 'maven'
+        name = _artifact
+        licenses = ['MIT']
+        vcsUrl = "${_githubUrl}.git"
+        publicDownloadNumbers = true
+
+        version {
+            name = _version
+            vcsTag = _version
+            gpg.sign = true
+        }
+    }
+}
+
+github {
+    def cmd = "git rev-parse --verify HEAD"
+    def child = Runtime.getRuntime().exec(cmd)
+    def input = new BufferedReader(new InputStreamReader(child.getInputStream()))
+    def hash = input.readLine()
+    input.close()
+
+    owner = 'importre'
+    repo = 'crayon'
+    token = System.getenv('GITHUB_TOKEN')
+    tagName = _version
+    targetCommitish = hash
+    name = "v${_version}"
+    body = ""
 }
