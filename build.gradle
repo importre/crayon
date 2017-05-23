@@ -116,7 +116,7 @@ github {
 
     owner = 'importre'
     repo = 'crayon'
-    token = System.getenv('GITHUB_TOKEN')
+    token = "${System.getenv('GITHUB_TOKEN')}"
     tagName = _version
     targetCommitish = hash
     name = "v${_version}"
