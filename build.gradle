@@ -26,7 +26,7 @@ apply plugin: 'maven-publish'
 
 def _group = 'com.importre'
 def _artifact = 'crayon'
-def _version = '0.0.1'
+def _version = '0.0.2'
 def _githubUrl = 'https://github.com/importre/crayon'
 
 group _group
