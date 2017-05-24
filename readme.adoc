@@ -6,6 +6,10 @@
 image::https://api.bintray.com/packages/importre/maven/crayon/images/download.svg[link="https://bintray.com/importre/maven/crayon/_latestVersion"]
 
 ```gradle
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile "com.importre:crayon:$crayon_version"
 }
