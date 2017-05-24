@@ -26,7 +26,7 @@ apply plugin: 'maven-publish'
 
 def _group = 'com.importre'
 def _artifact = 'crayon'
-def _version = '0.0.2'
+def _version = '0.1.0'
 def _githubUrl = 'https://github.com/importre/crayon'
 
 group _group
@@ -64,13 +64,19 @@ subprojects { sub ->
     }
 }
 
+dokka {
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/javadoc"
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 task javadocJar(type: Jar, dependsOn: 'dokka') {
     classifier = 'javadoc'
     from "$buildDir/dokka"
-}
-
-task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
-    outputFormat = 'javadoc'
 }
 
 publishing {
@@ -80,6 +86,7 @@ publishing {
             groupId _group
             artifactId _artifact
             version _version
+            artifact sourcesJar
             artifact javadocJar
         }
     }
