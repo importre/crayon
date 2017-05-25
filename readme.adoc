@@ -104,6 +104,12 @@ image::https://cloud.githubusercontent.com/assets/1744446/26310355/768eb03c-3f3b
 - `bgBrightYellow()`
 
 
+== Related
+
+- https://github.com/importre/hello-kotlin[hello-kotlin] - kotlin cli example
+- https://github.com/importre/progress[progress] - Terminal progress written in Kotlin Edit
+
+
 == License
 
 MIT © Jaewe Heo
